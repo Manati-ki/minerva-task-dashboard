@@ -2,6 +2,7 @@ import { useEntries } from './hooks/useEntries'
 import EntryForm from './components/EntryForm'
 import EntryFilters from './components/EntryFilters'
 import PlatformSummary from './components/PlatformSummary'
+import MonthlySummary from './components/MonthlySummary'
 import EntryList from './components/EntryList'
 import './App.css'
 
@@ -37,6 +38,11 @@ export default function App() {
         <p className="grand-total">
           Total: {grandTotal.hours.toFixed(2)}h — ${grandTotal.earnings.toFixed(2)}
         </p>
+      </section>
+
+      <section>
+        <h2>By month</h2>
+        <MonthlySummary entries={entries} />
       </section>
 
       <section>
