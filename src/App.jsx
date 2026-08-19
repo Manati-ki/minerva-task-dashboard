@@ -1,11 +1,20 @@
 import { useEntries } from './hooks/useEntries'
 import EntryForm from './components/EntryForm'
+import EntryFilters from './components/EntryFilters'
 import PlatformSummary from './components/PlatformSummary'
 import EntryList from './components/EntryList'
 import './App.css'
 
 export default function App() {
-  const { entries, addEntry, deleteEntry, totalsByPlatform, grandTotal } = useEntries()
+  const {
+    entries,
+    filters,
+    setFilters,
+    addEntry,
+    deleteEntry,
+    totalsByPlatform,
+    grandTotal,
+  } = useEntries()
 
   return (
     <div className="dashboard">
@@ -14,6 +23,11 @@ export default function App() {
       <section>
         <h2>Log an entry</h2>
         <EntryForm onAdd={addEntry} />
+      </section>
+
+      <section>
+        <h2>Filters</h2>
+        <EntryFilters filters={filters} onChange={setFilters} />
       </section>
 
       <section>
