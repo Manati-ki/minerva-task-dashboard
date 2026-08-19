@@ -25,6 +25,12 @@ export function useEntries() {
     ])
   }
 
+  const updateEntry = (id, changes) => {
+    setEntries((prev) =>
+      prev.map((e) => (e.id === id ? { ...e, ...changes } : e))
+    )
+  }
+
   const deleteEntry = (id) => {
     setEntries((prev) => prev.filter((e) => e.id !== id))
   }
@@ -63,6 +69,7 @@ export function useEntries() {
     filters,
     setFilters,
     addEntry,
+    updateEntry,
     deleteEntry,
     totalsByPlatform,
     grandTotal,
