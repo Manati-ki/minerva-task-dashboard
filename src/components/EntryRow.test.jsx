@@ -12,7 +12,7 @@ describe('EntryRow', () => {
 
     await userEvent.click(screen.getByLabelText(/edit entry/i))
 
-    const hoursInput = screen.getByLabelText(/edit hours/i)
+    const hoursInput = screen.getByLabelText(/hours for/i)
     await userEvent.clear(hoursInput)
     await userEvent.type(hoursInput, '3')
     await userEvent.click(screen.getByText('Save'))
@@ -29,5 +29,14 @@ describe('EntryRow', () => {
 
     expect(onUpdate).not.toHaveBeenCalled()
     expect(screen.getByLabelText(/edit entry/i)).toBeInTheDocument()
+  })
+
+  it('returns focus to the edit button after saving', async () => {
+    render(<EntryRow entry={entry} onUpdate={() => {}} onDelete={() => {}} />)
+
+    await userEvent.click(screen.getByLabelText(/edit entry/i))
+    await userEvent.click(screen.getByText('Save'))
+
+    expect(screen.getByLabelText(/edit entry/i)).toHaveFocus()
   })
 })
