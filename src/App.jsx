@@ -11,6 +11,7 @@ export default function App() {
     filters,
     setFilters,
     addEntry,
+    updateEntry,
     deleteEntry,
     totalsByPlatform,
     grandTotal,
@@ -40,7 +41,7 @@ export default function App() {
 
       <section>
         <h2>Recent entries</h2>
-        <EntryList entries={entries} onDelete={deleteEntry} />
+        <EntryList entries={entries} onUpdate={updateEntry} onDelete={deleteEntry} />
       </section>
     </div>
   )
