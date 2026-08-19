@@ -1,16 +1,27 @@
-# React + Vite
+# Minerva Task Dashboard
 
-This template provides a minimal setup to get React working in Vite with HMR and some Oxlint rules.
+A small React app for tracking hours and earnings across freelance AI-training and labeling platforms (DataAnnotation, Outlier AI, Appen, Remotasks, AligningTurn).
 
-Currently, two official plugins are available:
+## Features
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+- Log time/earnings entries per platform
+- Filter entries by platform and date range
+- Sort entries by date, platform, hours, or earnings
+- Per-platform and per-month summary totals
+- CSV export
+- Inline editing of logged entries
+- Data persisted locally via `localStorage`
 
-## React Compiler
+## Stack
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+- React + Vite
+- Vitest + React Testing Library for tests
 
-## Expanding the Oxlint configuration
+## Development
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and Oxlint's TypeScript related rules in your project.
+\`\`\`bash
+npm install
+npm run dev    # start dev server
+npm run test   # run tests
+npm run build  # production build
+\`\`\`
