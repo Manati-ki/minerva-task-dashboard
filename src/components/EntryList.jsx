@@ -1,6 +1,7 @@
+import EntryRow from './EntryRow'
 import { downloadCsv, entriesToCsv } from '../utils/exportCsv'
 
-export default function EntryList({ entries, onDelete }) {
+export default function EntryList({ entries, onUpdate, onDelete }) {
   if (entries.length === 0) return null
 
   const sorted = [...entries].sort((a, b) => b.date.localeCompare(a.date))
@@ -16,13 +17,7 @@ export default function EntryList({ entries, onDelete }) {
       </button>
       <ul className="entry-list">
         {sorted.map((e) => (
-          <li key={e.id}>
-            <span>{e.date}</span>
-            <span>{e.platform}</span>
-            <span>{e.hours}h</span>
-            <span>${Number(e.earnings).toFixed(2)}</span>
-            <button onClick={() => onDelete(e.id)}>×</button>
-          </li>
+          <EntryRow key={e.id} entry={e} onUpdate={onUpdate} onDelete={onDelete} />
         ))}
       </ul>
     </div>
