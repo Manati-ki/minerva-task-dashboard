@@ -12,6 +12,8 @@ export function useEntries() {
     }
   })
 
+  const [filters, setFilters] = useState({ platform: '', from: '', to: '' })
+
   useEffect(() => {
     localStorage.setItem(STORAGE_KEY, JSON.stringify(entries))
   }, [entries])
@@ -27,25 +29,42 @@ export function useEntries() {
     setEntries((prev) => prev.filter((e) => e.id !== id))
   }
 
+  const filteredEntries = useMemo(() => {
+    return entries.filter((e) => {
+      if (filters.platform && e.platform !== filters.platform) return false
+      if (filters.from && e.date < filters.from) return false
+      if (filters.to && e.date > filters.to) return false
+      return true
+    })
+  }, [entries, filters])
+
   const totalsByPlatform = useMemo(() => {
     const totals = {}
-    for (const e of entries) {
+    for (const e of filteredEntries) {
       if (!totals[e.platform]) totals[e.platform] = { hours: 0, earnings: 0 }
       totals[e.platform].hours += Number(e.hours)
       totals[e.platform].earnings += Number(e.earnings)
     }
     return totals
-  }, [entries])
+  }, [filteredEntries])
 
   const grandTotal = useMemo(() => {
-    return entries.reduce(
+    return filteredEntries.reduce(
       (acc, e) => ({
         hours: acc.hours + Number(e.hours),
         earnings: acc.earnings + Number(e.earnings),
       }),
       { hours: 0, earnings: 0 }
     )
-  }, [entries])
+  }, [filteredEntries])
 
-  return { entries, addEntry, deleteEntry, totalsByPlatform, grandTotal }
+  return {
+    entries: filteredEntries,
+    filters,
+    setFilters,
+    addEntry,
+    deleteEntry,
+    totalsByPlatform,
+    grandTotal,
+  }
 }
